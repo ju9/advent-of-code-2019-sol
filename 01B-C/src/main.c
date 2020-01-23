@@ -1,4 +1,4 @@
-// Task 2019/01A in C
+// Task 2019/01B in C
 
 #include <stdio.h> // file and io types and operations
 #include <stdlib.h> // standard library definitions - memory allocations

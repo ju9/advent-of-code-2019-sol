@@ -1,4 +1,4 @@
-// Task 2019/01A in C
+// Task 2019/01B in C
 
 #ifndef SOLUTION_H
 #define SOLUTION_H

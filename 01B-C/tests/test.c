@@ -1,4 +1,4 @@
-// Task 2019/01A in C
+// Task 2019/01B in C
 
 #include <stdlib.h>
 #include <stdio.h>
