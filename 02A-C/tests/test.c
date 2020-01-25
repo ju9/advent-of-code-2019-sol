@@ -174,26 +174,22 @@ START_TEST (test_main_loop)
 {
 	int tape1[5] = {1, 0, 0, 0, 99};
 	int final1[5] = {2,0,0,0,99};
-	int pc = 0;
-	computer_run(tape1, &pc);
+	computer_run(tape1);
 	ck_assert_intarr_eq(tape1, final1, 5);
 	
 	int tape2[5] = {2,3,0,3,99};
 	int final2[5] = {2,3,0,6,99};
-	pc = 0;
-	computer_run(tape2, &pc);
+	computer_run(tape2);
 	ck_assert_intarr_eq(tape2, final2, 5);
 	
 	int tape3[6] = {2,4,4,5,99,0};
 	int final3[6] = {2,4,4,5,99,9801};
-	pc = 0;
-	computer_run(tape3, &pc);
+	computer_run(tape3);
 	ck_assert_intarr_eq(tape3, final3, 6);
 	
 	int tape4[9] = {1,1,1,4,99,5,6,0,99};
 	int final4[9] = {30,1,1,4,2,5,6,0,99};
-	pc = 0;
-	computer_run(tape4, &pc);
+	computer_run(tape4);
 	ck_assert_intarr_eq(tape4, final4, 9);
 	
 

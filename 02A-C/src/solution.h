@@ -19,6 +19,6 @@ void set_indir(int *tape, int from, int val);
 
 int computer_step(int *tape, int *pc);
 
-void computer_run(int *tape, int *pc);
+void computer_run(int *tape);
 
 #endif /* SOLUTION_H */

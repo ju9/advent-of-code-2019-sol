@@ -124,11 +124,12 @@ int computer_step(int *tape, int *pc)
 
 
 // process operations until HALT
-void computer_run(int *tape, int *pc)
+void computer_run(int *tape)
 {
 	int halt;
+	int pc = 0;
 	
-	for (halt = 0; halt == 0; halt = computer_step(tape, pc));
+	for (halt = 0; halt == 0; halt = computer_step(tape, &pc));
 
 	return;
 }

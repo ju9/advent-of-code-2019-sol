@@ -7,7 +7,6 @@
 int main(void)
 {
 	int *tape = NULL;
-	int pc = 0;
 	int err;
 	
 	// read std-input onto tape, (initialize tape)
@@ -18,7 +17,7 @@ int main(void)
 		program_init(tape);
 		
 		// process the codes on tape
-		computer_run(tape, &pc);
+		computer_run(tape);
 		
 		// return @0
 		printf("%d\n", tape[0]);
