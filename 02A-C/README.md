@@ -26,30 +26,33 @@
 > ```1,9,10,3,
 > 2,3,11,0,
 > 99,
-> 30,40,50```
+> 30,40,50
+> ```
 > 
 > The first four integers, `1,9,10,3`, are at positions `0`, `1`, `2`, and `3`. Together, they represent the first opcode (`1`, addition), the positions of the two inputs (`9` and `10`), and the position of the output (`3`). To handle this opcode, you first need to get the values at the input positions: position `9` contains `30`, and position `10` contains `40`. _Add_ these numbers together to get `70`. Then, store this value at the output position; here, the output position (`3`) is _at_ position `3`, so it overwrites itself. Afterward, the program looks like this:
 > 
-> ```1,9,10,<em>70</em>,
+> ```1,9,10,_70_,
 > 2,3,11,0,
 > 99,
-> 30,40,50```
+> 30,40,50
+> ```
 > 
 > Step forward `4` positions to reach the next opcode, `2`. This opcode works just like the previous, but it multiplies instead of adding. The inputs are at positions `3` and `11`; these positions contain `70` and `50` respectively. Multiplying these produces `3500`; this is stored at position `0`:
 > 
-> ```<em>3500</em>,9,10,70,
+> ```_3500_,9,10,70,
 > 2,3,11,0,
 > 99,
-> 30,40,50```
+> 30,40,50
+> ```
 > 
 > Stepping forward `4` more positions arrives at opcode `99`, halting the program.
 > 
 > Here are the initial and final states of a few more small programs:
 > 
->     `1,0,0,0,99` becomes `<em>2</em>,0,0,0,99` (`1 + 1 = 2`).
->     `2,3,0,3,99` becomes `2,3,0,<em>6</em>,99` (`3 * 2 = 6`).
->     `2,4,4,5,99,0` becomes `2,4,4,5,99,<em>9801</em>` (`99 * 99 = 9801`).
->     `1,1,1,4,99,5,6,0,99` becomes `<em>30</em>,1,1,4,<em>2</em>,5,6,0,99`.
+>     `1,0,0,0,99` becomes `_2_,0,0,0,99` (`1 + 1 = 2`).
+>     `2,3,0,3,99` becomes `2,3,0,_6_,99` (`3 * 2 = 6`).
+>     `2,4,4,5,99,0` becomes `2,4,4,5,99,_9801_` (`99 * 99 = 9801`).
+>     `1,1,1,4,99,5,6,0,99` becomes `_30_,1,1,4,_2_,5,6,0,99`.
 > 
 > Once you have a working computer, the first step is to restore the gravity assist program (your puzzle input) to the "1202 program alarm" state it had just before the last computer caught fire. To do this, _before running the program_, replace position `1` with the value `12` and replace position `2` with the value `2`. _What value is left at position_ `0` after the program halts?
 
