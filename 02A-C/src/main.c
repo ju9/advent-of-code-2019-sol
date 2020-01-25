@@ -1,4 +1,4 @@
-// Task 2019/01A in C
+// Task 2019/02A in C
 
 #include <stdio.h> // file and io types and operations
 #include <stdlib.h> // standard library definitions - memory allocations
@@ -6,11 +6,27 @@
 
 int main(void)
 {
-
-	// load tape;
-	// init tape;
-	// computer_run;
+	int *tape = NULL;
+	int pc = 0;
+	int err;
 	
-	// return @0
-	//~ printf("%d", tape[0]);
+	// read std-input onto tape, (initialize tape)
+	err = load_tape(stdin, &tape);
+
+	if (err == 0) {
+		// initialize some values on the tape
+		program_init(tape);
+		
+		// process the codes on tape
+		computer_run(tape, &pc);
+		
+		// return @0
+		printf("%d\n", tape[0]);
+	}
+	
+	// free tape resources
+	unload_tape(tape);
+	
+	return err;
+	
 }

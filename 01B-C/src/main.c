@@ -7,5 +7,5 @@
 int main(void)
 {
 	int fuel_req = read_evaluate_all_modules(stdin);
-	printf("%d", fuel_req);
+	printf("%d\n", fuel_req);
 }
