@@ -5,19 +5,8 @@
 #include <stdlib.h> // standard library definitions - memory allocations
 // #include <string.h> // string and mem functions
 
-int get_module_fuel_req(int mass)
-{
-	return (mass / 3) - 2;
-}
-
-void account_fuel_req(int *fuel_req, int module_fuel_req)
-{
-	*fuel_req += module_fuel_req;
-}
-
-
 // set file to stdin
-int read_module_mass(FILE *file)
+int read_code(FILE *file)
 {
 	int mass;
 	int did_read;
@@ -31,26 +20,25 @@ int read_module_mass(FILE *file)
 	return mass;
 }
 
-
-
-// set file to stdin
-int read_evaluate_all_modules(FILE *file)
+// preset tape @1 and @2 with special values
+void program_init(int *tape)
 {
-	int mass;
-	int fuel_req = 0;
-	
-	while ( ( mass =/*=*/ read_module_mass(file) ) != -1 ) {
-		account_fuel_req(&fuel_req,
-			get_module_fuel_req(mass)
-		);
-	}
-
-	return fuel_req;
+	// stub
+	return;
 }
 
+// process one operation starting at @PC; increment PC; return status "halted"
+int computer_step(int *tape, int *pc)
+{
+	// stub
+	return -1;
+}
 
-
-
-
-
-
+// process operations until HALT
+void computer_run(int *tape, int *pc)
+{
+	int halted = 0;
+	
+	// stub
+	return;
+}

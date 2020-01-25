@@ -30,7 +30,7 @@ int read_module_mass(FILE *file)
 	int mass;
 	int did_read;
 	// read a number (mass)
-	//   and read and discard non-number (the ',' separator)
+	//   and read and discard non-number (the ',' or '\n' separator)
 	did_read = fscanf(file, "%d%*[^0123456789]", &mass);
 	
 	if (did_read < 1) {
