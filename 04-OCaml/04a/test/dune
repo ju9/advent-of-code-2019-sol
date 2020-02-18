@@ -1,0 +1,4 @@
+(tests
+	(names test_pass test_solution test_generators)
+	(libraries ounit2 pass generators solution)
+)
