@@ -37,6 +37,48 @@ let test_double_valid _ =
 	assert_invalid double_valid 121314;
 	assert_invalid double_valid 512131
 
+let assert_consec_repeats len rest_num num =
+	let pass = Pass.of_int num in
+	let result = consec_repeats (List.hd pass) (List.tl pass) 1 in
+	assert_equal len (fst result) ~printer:string_of_int;
+	assert_equal rest_num (Pass.to_int (snd result)) ~printer:string_of_int
+
+let test_consec_repeats _ =
+	assert_consec_repeats 1 0 1;
+	assert_consec_repeats 2 0 11;
+	assert_consec_repeats 3 0 111;
+	assert_consec_repeats 1 111 1118;
+	assert_consec_repeats 3 8 8111
+
+let test_strict_double_valid _ =
+	assert_valid strict_double_valid 11;
+	assert_valid strict_double_valid 22;
+	assert_valid strict_double_valid 99;
+	assert_valid strict_double_valid 122;
+	assert_valid strict_double_valid 221;
+	assert_valid strict_double_valid 1221;
+	assert_valid strict_double_valid 100121;
+	assert_valid strict_double_valid 133221;
+	assert_valid strict_double_valid 123455;
+	assert_valid strict_double_valid 112345;
+	assert_valid strict_double_valid 123345;
+	assert_valid strict_double_valid 111122;
+	assert_valid strict_double_valid 112222;
+	
+	assert_invalid strict_double_valid 111112;
+	assert_invalid strict_double_valid 122222;
+	assert_invalid strict_double_valid 123444;
+	assert_invalid strict_double_valid 588889;
+	assert_invalid strict_double_valid 222289;
+
+	assert_invalid strict_double_valid 1;
+	assert_invalid strict_double_valid 2;
+	assert_invalid strict_double_valid 9;
+	assert_invalid strict_double_valid 10;
+	assert_invalid strict_double_valid 34;
+	assert_invalid strict_double_valid 121314;
+	assert_invalid strict_double_valid 512131
+
 let test_nondec_valid _ =
 	assert_valid nondecreasing_valid 6;
 	assert_valid nondecreasing_valid 11;
@@ -62,6 +104,8 @@ let test_double_next _ =
 	assert_next double_next 0 11;
 	assert_next double_next 8 11;
 	assert_next double_next 11 22;
+	assert_next double_next 198 199;
+	assert_next double_next 199 200;
 	assert_next double_next 2343 2344;
 	assert_next double_next 2344 2355;
 	assert_next double_next 2348 2355;
@@ -94,6 +138,8 @@ let test_nondec_next _ =
 let suite = 
 	"Generators tests" >::: [
 		"validity of doubles" >:: test_double_valid;
+		"consecutive repeats" >:: test_consec_repeats;
+		"validity of strict doubles" >:: test_strict_double_valid;
 		"validity of non-decresasing" >:: test_nondec_valid;
 		"generation of doubles" >:: test_double_next;
 		"generation of non-decreasing" >:: test_nondec_next

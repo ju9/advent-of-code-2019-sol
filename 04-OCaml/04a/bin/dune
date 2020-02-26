@@ -1,5 +1,0 @@
-(executable
-	(public_name solution-04a)
-	(name main)
-	(libraries solution)
-)

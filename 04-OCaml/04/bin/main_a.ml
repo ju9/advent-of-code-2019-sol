@@ -27,8 +27,5 @@ let () =
 		let validators = [ Generators.double_valid; Generators.nondecreasing_valid ] in
 		let generators = [ Generators.double_next; Generators.nondecreasing_next ] in
 		let result = passwords_in_range_count  range_min range_max validators generators in
-		Printf.printf "found passwords: %d\n" result;
+		Printf.printf "found passwords: %d\n" result
 
-(*
-The right answer is 1625
-*)

@@ -16,6 +16,30 @@ let rec double_valid : t_fun_valid = function
 		else double_valid tail
 
 
+let rec consec_repeats digit pass_rest acc =
+	(* scan the head of pass for repeats of a given character;
+		return the number of found repeats, and the remainder of pass
+		that was not scanned *)
+		match pass_rest with
+		| [] -> acc, []
+		| hd::tl ->
+			if (hd = digit) then
+				consec_repeats digit tl (acc + 1)
+			else
+				acc, pass_rest
+
+let rec strict_double_valid : t_fun_valid = function
+	| [] | [_] -> false
+	| x::xs ->
+		match consec_repeats x xs 1 with
+		| 2, _ -> true (* don't need to scan the remainder *)
+		| _, [] -> false (* failed search *)
+		| _, pass_rest -> strict_double_valid pass_rest
+	
+let strict_double_next _ =
+	[]
+	(* stub *)
+
 let double_next pass =
 	let rec closest_double pass =
 		match pass with
@@ -24,16 +48,18 @@ let double_next pass =
 			if (p < x) then
 			(* units can catch up to tens *)
 				(x::tail)
+				(* replaced 'p::x::xs' with 'x::x::xs' *)
 			
-			else if (x <= 9) then
+			else if (x < 9) then
 			(* need to increment tens, but is still below 90 *)
 				let xinc = x + 1 in
 				(xinc::xinc::xs)
+				(* replaced 'p::x::xs' with 'x+1::x+1::xs' *)
 			
 			else 
 			(* need spill to higher orders, as tens are overflowing now *)
 				(0::(closest_double tail))
-				(* NOTE: this is clearly invalid for the nondecreasing generator *)
+				(* NOTE: this is invalid for the nondecreasing generator *)
 			
 	in
 	let succ = Pass.succ pass in
