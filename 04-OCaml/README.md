@@ -30,3 +30,22 @@ The straight-forward approach (A) is to do an exhaustive search from _min_ to _m
 Another approach (B) would be to derive the succeeding password from the preceding one algorithmically. This could be more complicated, but is still viable. This approach should perform faster.
 
 It turns out that the simple approach (A) is just a degenerate case of (my implementation of) the second approach (B). I'm basing my solution on B.
+
+> ## Part Two
+> 
+> An Elf just remembered one more important detail: the two adjacent matching digits _are not part of a larger group of matching digits_.
+> 
+> Given this additional criterion, but still ignoring the range rule, the following are now true:
+> 
+> - `112233` meets these criteria because the digits never decrease and all repeated digits are exactly two digits long.
+> - `123444` no longer meets the criteria (the repeated `44` is part of a larger group of `444`).
+> - `111122` meets the criteria (even though `1` is repeated more than twice, it still contains a double `22`).
+> 
+> _How many different passwords_ within the range given in your puzzle input meet all of the criteria?
+
+## Considerations
+
+Can derive a simple-ish function for validation _"is a given password valid for the updated condition in Part two"_.
+
+But a function for finding a _"next candidate password"_ for the same condition is harder - will not implement (using only a stub function for this) -- in this case the process will evaluate more candidate passwords, but will still validate (and count) only the valid ones.
+

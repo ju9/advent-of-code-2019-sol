@@ -24,11 +24,24 @@ let () =
 	match range with
 	| Error e -> print_endline e
 	| Ok (range_min, range_max) ->
-		let validators = [ Generators.strict_double_valid; Generators.nondecreasing_valid ] in
+		let validators = [
+			Generators.strict_double_valid;
+			Generators.nondecreasing_valid
+		] in
 		let generators = [
 			Generators.double_next;
+			(* Not the right thing for 04b,
+				but it is a superset of the right one; this will help. *)
+				
 			Generators.strict_double_next;
+			(* Stub; algo not implemented.
+				This will induce a state of "disagreement among generators",
+				which is important, as the validators will then
+				always get consulted, and the "Strict-double" algo
+				is implemented in a validator *)
+			
 			Generators.nondecreasing_next
+			(* The other rule remains unchanged *)
 		] in
 		let result = passwords_in_range_count  range_min range_max validators generators in
 		Printf.printf "found passwords: %d\n" result
