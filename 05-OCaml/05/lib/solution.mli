@@ -1,14 +1,26 @@
 
 
+type addressing = Direct | Immediate
+
 type three_arg_op = {
 	arg1: int;
 	arg2: int;
-	dest: int
+	dest: int;
+	amarg1: addressing;
+	amarg2: addressing;
+	amdest: addressing; (* always Direct addressing, never Immediate *)
+}
+
+type one_arg_op = {
+	arg: int;
+	amode : addressing
 }
 
 type instruction =
 	  Addition of three_arg_op
 	| Multiplication of three_arg_op
+	| Input of int
+	| Output of one_arg_op
 	| Halt
 	| Unknown of int
 
@@ -23,6 +35,11 @@ val parse_instruction :
 	-> instruction * int
 (* Read from [tape] from at address given by [instruction pointer], consuming one or more codes. Construct an [instruction with its parameters] and compute a new [instruction pointer] advanced past this instruction; return these two items [instr * next_ip] *)
 
+val read_code :
+	   unit
+	-> int
+(* read one keyboard input, return as integer *)
+
 val perform_instruction :
 	   int array
 	-> instruction
@@ -34,12 +51,6 @@ val run_tape :
 	-> unit
 (* Run [tape] from start until Halt or error *)
 
-val setup_tape :
-	   int array
-	-> int
-	-> int
-	-> unit
-(* On [tape] set up initial codes [#1] and [#2] *)
 
 val run_program :
 	   string

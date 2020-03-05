@@ -2,7 +2,7 @@
 
 ## E2P1
 
-- read input (file) into a line (string)
+- ~~read input (file) into a line (string)~~
 - ~~parse input line (string) with codes into an array (tape)~~
 - ~~scan the tape from start to end, processing them instructions~~
 - ~~read by indirect addressing~~
@@ -19,7 +19,7 @@ E2P2 seems not not to be a dependency of E5P1.
 
 ## E5P1
 
-- input instruction "3" (@1 = in), length 2
-- output instruction "4" (out = @1), length 2
-- parse opcodes in "parameter mode", extend opcode typedefs
+- ~~input instruction "3" (@1 = in), length 2~~
+- ~~output instruction "4" (out = @1), length 2~~
+- ~~parse opcodes in "parameter mode", extend opcode typedefs~~
 

@@ -26,5 +26,5 @@ let () =
 	| Error e -> print_endline e
 	| Ok path ->
 		let data = load_file path in
-		let output = run_program data in
-		Printf.printf "Program done, output: %d\n" output
+		let _ = run_program data in
+		()
