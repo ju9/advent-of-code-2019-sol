@@ -16,8 +16,10 @@ In recent years I have used mainly PHP at my former job. I wish to practice prog
 
 ## I/O Interface
 
-Each solution is a standalone program called _solution_. Input will be read from standard input, output will be passed to standard output.
+Each solution is a standalone program called _solution_ or _main.exe_. Input will be read from standard input, output will be passed to standard output.
 Usage: solution < input.txt > output.txt
+
+Where keyboard input is needed, the usage may be: main.exe "input.txt" etc. - may be indicated in Makefile under the 'run' target.
 
 For solutions in interpreted languages the usage may vary; wrapper in Bash may be used.
 
@@ -26,3 +28,8 @@ For solutions in interpreted languages the usage may vary; wrapper in Bash may b
 ### C
 
 - [Check](https://libcheck.github.io/check/) (tests)
+
+### OCaml
+
+- [dune](https://dune.build/) (building)
+- [ounit2](https://github.com/gildor478/ounit) (tests)
