@@ -1,0 +1,5 @@
+(library
+	(name solution)
+	(modules solution)
+;	(libraries foo bar)
+)
