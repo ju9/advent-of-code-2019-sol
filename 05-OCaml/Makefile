@@ -13,9 +13,9 @@ clean:
 INPUT = "./input-05.txt"
 
 run: all
-	echo "trying to run solutions to 05a, then 05b"
-	./main_a.exe $(INPUT) && \
-	./main_b.exe $(INPUT)
+	echo "Trying to run solutions to 05."
+	echo "The input code for part 1 is '1'. For part 2 it is '5'."
+	./main.exe $(INPUT)
 	
 
 .PHONY: check test all clean run

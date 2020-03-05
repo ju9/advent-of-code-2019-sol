@@ -6,23 +6,32 @@ type three_arg_op = {
 	arg1: int;
 	arg2: int;
 	dest: int;
-	amarg1: addressing;
-	amarg2: addressing;
-	amdest: addressing; (* always Direct addressing, never Immediate *)
 }
 
-type one_arg_op = {
-	arg: int;
-	amode : addressing
+type jump_arg_op = {
+	cond: int;
+	jump: int
+}
+
+type addr_params = {
+	amarg1: addressing;
+	amarg2: addressing;
+	amdest: addressing (* always Direct addressing, never Immediate *)
 }
 
 type instruction =
-	  Addition of three_arg_op
-	| Multiplication of three_arg_op
+	  Addition of (three_arg_op * addr_params)
+	| Multiplication of (three_arg_op * addr_params)
 	| Input of int
-	| Output of one_arg_op
+	| Output of (int * addr_params)
+	| Jump_true of (jump_arg_op * addr_params)
+	| Jump_false of (jump_arg_op * addr_params)
+	| Less of (three_arg_op * addr_params)
+	| Equal of (three_arg_op * addr_params)
 	| Halt
 	| Unknown of int
+
+
 
 val tape_of_string :
 	   string
@@ -43,8 +52,8 @@ val read_code :
 val perform_instruction :
 	   int array
 	-> instruction
-	-> unit
-(* On [tape], given an [instruction], perform that instruction's operation *)
+	-> int option
+(* On [tape], given an [instruction], perform that instruction's operation, return possible [redirection] (new IP) *)
 
 val run_tape :
 	   int array
