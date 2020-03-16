@@ -50,26 +50,26 @@ let parse_input reader =
 
 
 let compute_checksum table =
-	let rec counter acc depth center =
-		let _, satellites = Hashtbl.find table center in
+	let rec counter acc depth node =
+		let _, satellites = Hashtbl.find table node in
 		depth (* add depth of each item to the sum *)
 		+
 		List.fold_left
 			(fun lacc item -> counter lacc (depth + 1) item)
 				(* run over each satellite item, at depth + 1 *)
 			acc (* start count from where the last count left of (computing a sum) *)
-			satellites (* run over all satellites of this center *)
+			satellites (* run over all satellites of this node *)
 	in
 	counter 0 0 com
 	(* note: This recursion probbly won't tail-optimize. Can we rewrite it? *)
 	
 
-let get_parent table center =
-	let parent, _ = Hashtbl.find table center in
+let get_parent table node =
+	let parent, _ = Hashtbl.find table node in
 	parent
 
 
-let trace_path table center =
+let trace_path table node =
 	let rec tracer acc node =
 		let parent = get_parent table node in
 		if parent = free then
@@ -77,21 +77,19 @@ let trace_path table center =
 		else
 			tracer (parent::acc) parent
 	in
-	tracer [] center
+	tracer [] node
 
 let transfer_count table a b =
 	let pa = trace_path table a in
 	let pb = trace_path table b in
 	let rec short_count pa pb =
 		match pa, pb with
-		| [], [] -> 0
-		| [], _ -> List.length pb
-		| _, [] -> List.length pa
-		| ha::ta, hb::tb ->
-			if ha <> hb then
-				(List.length pa) + (List.length pb)
-			else
-				short_count ta tb
+		| ha::ta, hb::tb when ha = hb ->
+			short_count ta tb
+			(* both paths are nonempty, and start at the same node: can shorten *)
+		| _, _ ->
+			(List.length pa) + (List.length pb)
+			(* different paths, or any empty: count up what's left *)
 	in
 	short_count pa pb
 	
