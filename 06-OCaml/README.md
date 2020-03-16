@@ -76,3 +76,68 @@ The complete algo may look like this:
 - in the above process, keep track the sum of all depths in an accumulator - that will be the output value when all the nodes are traversed
 
 I/O interface: can feed `input.txt` (list of those `AAA)BBB` entries) into _stdin_, and output the checksum onto _stdout_.
+
+
+> ## Part Two
+> 
+> Now, you just need to figure out how many _orbital transfers_ you (`YOU`) need to take to get to Santa (`SAN`).
+> 
+> You start at the object `YOU` are orbiting; your destination is the object `SAN` is orbiting. An orbital transfer lets you move from any object to an object orbiting or orbited by that object.
+> 
+> For example, suppose you have the following map:
+> ```
+> COM)B
+> B)C
+> C)D
+> D)E
+> E)F
+> B)G
+> G)H
+> D)I
+> E)J
+> J)K
+> K)L
+> K)YOU
+> I)SAN
+> ```
+> Visually, the above map of orbits looks like this:
+> ```
+>                           YOU
+>                          /
+>         g - h       J - K - l
+>        /           /
+> com - b - c - D - E - f
+>                \
+>                 I - SAN
+> ```
+> In this example, `YOU` are in orbit around `K`, and `SAN` is in orbit around `I`. To move from `K` to `I`, a minimum of `4` orbital transfers are required:
+> 
+> - `K` to `J`
+> - `J` to `E`
+> - `E` to `D`
+> - `D` to `I`
+> 
+> Afterward, the map of orbits looks like this:
+> ```
+>         G - H       J - K - L
+>        /           /
+> COM - B - C - D - E - F
+>                \
+>                 I - SAN
+>                  \
+>                   YOU
+> ```
+> _What is the minimum number of orbital transfers required_ to move from the object `YOU` are orbiting to the object `SAN` is orbiting? (Between the objects they are orbiting - _not_ between `YOU` and `SAN`.)
+
+## Considerations
+
+Need to navigate from a leaf towards the root - requires the data representation of leaves to have a link to parent node.
+
+The algo may look like this:
+
+- construct the table like before, but additionally with child->parent references
+- trace path _A_ from `YOU`'s parent to the root `COM`, and trace path _B_ from `SAN`'s parent to `COM`
+- eliminate common nodes between the two paths, (but must not lose the last common node)
+- the lengths of the remaining parts of paths _A_ and _B_ added up is the result
+
+The paths _A_ and _B_ mentioned above can be represented nicely by a singly linked list, with the order of nodes like so: `COM::B::...::YOU::[]`.
