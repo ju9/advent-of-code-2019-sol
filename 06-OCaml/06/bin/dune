@@ -1,7 +1,14 @@
 (executable
-	(public_name main)
+	(public_name main-a)
 	(package solution-06)
-	(name main)
-	(modules main)
+	(name main_a)
+	(modules main_a)
+	(libraries solution)
+)
+(executable
+	(public_name main-b)
+	(package solution-06)
+	(name main_b)
+	(modules main_b)
 	(libraries solution)
 )
