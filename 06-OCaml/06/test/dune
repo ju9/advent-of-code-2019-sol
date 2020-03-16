@@ -1,0 +1,4 @@
+(tests
+	(names test_solution)
+	(libraries ounit2 solution)
+)

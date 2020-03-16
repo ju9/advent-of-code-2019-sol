@@ -1,0 +1,7 @@
+(executable
+	(public_name main)
+	(package solution-06)
+	(name main)
+	(modules main)
+	(libraries solution)
+)
